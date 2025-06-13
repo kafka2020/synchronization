@@ -4,7 +4,6 @@ public class Main {
     public static final Map<Integer, Integer> sizeToFreq = new HashMap<>();
 
     public static void main(String[] args) throws InterruptedException {
-        // Создаем и запускаем потоки
         Thread[] threads = new Thread[1000];
         for (int i = 0; i < 1000; i++) {
             threads[i] = new Thread(() -> {
@@ -18,12 +17,10 @@ public class Main {
             threads[i].start();
         }
 
-        // Ждем завершения всех потоков
         for (Thread thread : threads) {
             thread.join();
         }
 
-        // Находим самую частую частоту
         int maxFreq = 0;
         int maxCount = 0;
         for (Map.Entry<Integer, Integer> entry : sizeToFreq.entrySet()) {
@@ -33,7 +30,6 @@ public class Main {
             }
         }
 
-        // Выводим результаты
         System.out.printf("Самое частое количество повторений %d (встретилось %d раз)\n", maxFreq, maxCount);
         System.out.println("Другие размеры:");
         for (Map.Entry<Integer, Integer> entry : sizeToFreq.entrySet()) {
